@@ -15,3 +15,15 @@ kotlin {
         binaries.executable() // make standalone executable .wasm (not a library etc.)
     }
 }
+
+tasks.register<Exec>("runWasm") {
+    dependsOn("build")
+    commandLine(
+        "wasmtime", "run",
+        // we need to enable three wasm proposals with -W flag since they're not enabled by Wasmtime by default
+        "-W", "gc", // garbage collection
+        "-W", "exceptions",
+        "-W", "function-references", // typed function references for lambdas, higher-order functions etc.
+        "build/compileSync/wasmWasi/main/productionExecutable/optimized/kotlin-non-browser-wasm.wasm"
+    )
+}
