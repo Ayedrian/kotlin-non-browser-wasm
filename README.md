@@ -15,9 +15,9 @@ The gradle wrapper should automatically download the correct version (9.2.1).
 ./gradlew runWasm
 ```
 
-This compiles the Kotlin source to a `.wasm` binary and executes it with Wasmtime. 
+This compiles the Kotlin source to a `.wasm` binary and executes it with Wasmtime.
 
 ## Notes
-
+- Added the console=plain option in gradle.properties, since Gradle's progress UI interfered/didn't look good with keyboard input.
 - The `wasmWasi` target in Kotlin 2.3.21 is in beta, it is functional but not yet stable.
 - This project intentionally has no browser target, it's a focused WASI experiment.
